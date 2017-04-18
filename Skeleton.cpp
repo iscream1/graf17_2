@@ -780,6 +780,8 @@ public:
 // The virtual world: single quad
 FullScreenTexturedQuad fullScreenTexturedQuad;
 
+Sphere *sphere;
+
 // Initialization, create an OpenGL context
 void onInitialization() {
 	glViewport(0, 0, windowWidth, windowHeight);
@@ -793,7 +795,7 @@ void onInitialization() {
 
 	scene.camera.eye=vec4(0.0f, 0.0f, -300.0f);
 
-	Sphere *sphere=new Sphere();
+	sphere=new Sphere();
 	sphere->material=new SmoothMaterial();
 
 	scene.add(sphere);
@@ -815,6 +817,9 @@ void onInitialization() {
         delete[] wo[i];
     }
     delete[] wo;
+
+	delete sphere->material;
+	delete sphere;
 
 	// Create vertex shader from string
 	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
